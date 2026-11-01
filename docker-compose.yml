@@ -54,7 +54,7 @@ services:
       - mlflow_runs:/mlruns
 
   spark-master:
-    image: docker.io/bitnami/spark:3.5.3
+    image: docker.io/spark:3.5.3
     container_name: spark-master
     environment:
       SPARK_MODE: master
@@ -97,7 +97,7 @@ services:
         ipv4_address: 192.168.1.110
 
   cassandra:
-    image: docker.io/bitnami/cassandra:5.0.2
+    image: docker.io/cassandra:5
     container_name: cassandra
     ports:
       - "9042:9042"
@@ -130,7 +130,7 @@ services:
         ipv4_address: 192.168.1.105
 
   zookeeper:
-    image: docker.io/bitnami/zookeeper:3.8.1
+    image: docker.io/zookeeper:3.8
     container_name: zookeeper
     ports:
       - "2181:2181"
