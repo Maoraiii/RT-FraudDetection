@@ -2,6 +2,7 @@
 # Datasets folder
 
 datasets
+!datasets/.gitkeep
 .vscode
 
 

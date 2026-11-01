@@ -1,4 +1,4 @@
-FROM apache/superset:latest
+FROM docker.io/apache/superset:latest
 
 USER root
 

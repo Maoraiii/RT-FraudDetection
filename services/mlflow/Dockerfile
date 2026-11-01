@@ -1,6 +1,6 @@
 FROM python:3.12.7-slim
 
-COPY --from=openjdk:11-jre-slim /usr/local/openjdk-11 /usr/local/openjdk-11
+COPY --from=docker.io/library/eclipse-temurin:8-jre /opt/java/openjdk /usr/local/openjdk-8
 
 # Set working directory
 WORKDIR /app

@@ -1,17 +1,21 @@
 FROM python:3.12.7-slim
-COPY --from=openjdk:8-jre-slim /usr/local/openjdk-8 /usr/local/openjdk-8
+
+COPY --from=docker.io/library/eclipse-temurin:8-jre /opt/java/openjdk /usr/local/openjdk-8
 
 ENV JAVA_HOME=/usr/local/openjdk-8
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
-RUN update-alternatives --install /usr/bin/java java /usr/local/openjdk-8/bin/java 1
-
-RUN apt-get update && apt-get install -y procps git
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends procps git \
+    && update-alternatives --install /usr/bin/java java "${JAVA_HOME}/bin/java" 1 \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 COPY ./services/batch_processing /app
 
-RUN --mount=type=cache,target=/root/.cache/pip pip install -r batch_processing_requirements.txt
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install -r batch_processing_requirements.txt
 
 LABEL Name="batch_processing"
 
